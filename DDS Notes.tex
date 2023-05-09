@@ -340,18 +340,19 @@
 	
 	\configuratedText{\textit{\textbf{Correctness}}: here is just like \textit{Eliminate Duplicates} algorithm. except that delivering here means logging the messages into a stable storage.\\
 	\textit{\textbf{Performance}}: In terms of messages it is like \textit{Eliminate Duplicates} algorithm. However, here we require one log operation every time a new message is received.}
+	
 	\subsubsection{Authenticated Perfect Links}	
 	
 	\configuratedText{In both fair-loss and stubborn point-to-point links abstractions \textit{no creation} property can not be guaranteed in presence of Byzantine Processes.\\ Authenticated Perfect Link uses the same interface as the other point-to-point links abstractions. \textit{Authenticity} property is stronger that \textit{no creation} property. }
 	\sectionCenteredfigure{\interfaceAPL}{Interface of Authenticated perfect point-to-point links}{interface-of-authenticated-perfect-point-to-point-links}
 
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\linewidth]{"resources/Section 1/Algorithm 2.4 - Authenticate and Filter"}
-	\caption{}
-	\label{fig:algorithm-2}
-\end{figure}
+	\configuratedText{\textbf{Example: Algorithm 2.4 (Authenticate and Filter)}\\ 
+	Uses a MAC to implement authenticated perfect point-to-point link over a stubborn links abstraction. }
+	
+	\sectionCenteredfigure{\algorithmAuthenticateFilter}{Algorithm 2.4 - Authenticate and Filter}{algorithm-2-4}
+	
+	\configuratedText{\textit{\textbf{Correctness}}: The \textit{reliable delivery} and \textit{no duplication} follows the same argument as for algorithm 2.2. For \textit{authenticity} property\\
+	\textit{\textbf{Performance}}: The same issue arises for the set \textit{delivered} that grows without bound. Cryptographic authentication adds a modest computational overhead.}
 
 	\newpage
 	\section{Time in Distributed Systems}
@@ -361,7 +362,6 @@
 	
 	\newpage
 	\section{Distributed Mutual Exclusion}
-	
 	
 	\newpage
 	\section{Broadcast Communications}
