@@ -260,6 +260,62 @@
 
 	\section{Modeling Distributed Systems}
 	
+	\subsection{Modeling Processes and their interactions}
+	
+	\subsection{Specification in terms of Safety and Liveness Property}
+	
+	\subsection{Modeling Failures}
+	
+	\subsection{Timing Assumptions}
+	
+	\sectionCenteredfigure{\timingSummary}{Summary on Timing Assumptions}{summary-on-timing-assumptions}
+	
+	\subsection{Abstracting Communication}
+	\configuratedText{The abstraction of a \textit{link} is used to represent the network components of the distributed system.\\
+	Every pair of processes is connected by a bidirectional link, a topology that provides full connectivity among the processes.\\
+	Concrete examples of such architectures are illustrated in \figref{the-link-abstraction-and-different-instances} include the use of (a) a fully connected mesh, (b) a broadcast medium, (c) a ring, (d) a mesh of links interconnected with bridges}
+	
+	\sectionCenteredfigure{\linkAbstraction}{The link abstraction and different instances}{the-link-abstraction-and-different-instances}
+	
+	\subsubsection{Abstracting Link Failures}
+	\configuratedText{Here we will introduce the following link abstractions considering processes faults:
+	\begin{itemize}
+	\item 	Fair-Loss Links
+	\item 	Stubborn Links
+	\item 	Perfect Links
+	\item 	Logged Perfect Links
+	\item 	Authenticated Perfect Links
+	\end{itemize}
+	}
+	
+	\subsubsection{Fair-Loss Links}
+	
+	\configuratedText{The \textbf{weakest} variant of the link abstraction.}
+	
+	\sectionCenteredfigure{\interfaceFLL}{Interface of fair-loss point-to-point links}{interface-of-fair-loss-point-to-point-links}
+	
+	\subsubsection{Stubborn Links}
+	
+	\configuratedText{The stubborn delivery property causes every message sent over the link to be delivered at the receiver an unbounded number of times.}
+	
+	\sectionCenteredfigure{\interfaceSL}{Interface of stubborn point-to-point links}{interface-of-stubborn-point-to-point-links}
+
+	\subsubsection{Perfect Links}
+	\configuratedText{With the stubborn links abstraction, it is up to the target process to check whether a given message has already been delivered or not. Adding mechanisms for detecting and suppressing message duplicates, in addition to mechanisms for message retransmission, allows us to build an even higher-level primitive: the \textbf{perfect links} abstraction, sometimes also called the \textit{reliable links} abstraction.}
+
+	\sectionCenteredfigure{\interfacePL}{Interface of perfect point-to-point links}{interface-of-perfect-point-to-point-links}
+
+	
+	\subsubsection{Logged Perfect Links}
+
+	\sectionCenteredfigure{\interfaceLPL}{Interface of logged perfect point-to-point links}{interface-of-logged-perfect-point-to-point-links}
+
+	\subsubsection{Authenticated Perfect Links}	
+
+	\sectionCenteredfigure{\interfaceAPL}{Interface of Authenticated perfect point-to-poin links}{interface-of-authenticated-perfect-point-to-point-links}
+
+	\subsubsection{Algorithms on Abstracting Links}	
+		
 	\newpage
 	\section{Time in Distributed Systems}
 	
@@ -270,15 +326,17 @@
 	\section{Distributed Mutual Exclusion}
 	
 	\newpage
-	\section{Failure Detection Abstraction}
+	\subsection{Abstracting Communication}
 	
-	\subsection{Perfect Failure Detectors}
+	\subsubsection{Failure Detection Abstraction}
 	
-	\subsection{Eventually Perfect Failure Detectors}
+	\subsubsection{Perfect Failure Detectors}
 	
-	\subsection{Leader Election}
+	\subsubsection{Eventually Perfect Failure Detectors}
 	
-	\subsection{Eventual Leader Election}
+	\subsubsection{Leader Election}
+	
+	\subsubsection{Eventual Leader Election}
 	
 	\newpage
 	\section{Broadcast Communications}
