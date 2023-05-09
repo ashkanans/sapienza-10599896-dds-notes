@@ -299,23 +299,60 @@
 	\configuratedText{The stubborn delivery property causes every message sent over the link to be delivered at the receiver an unbounded number of times.}
 	
 	\sectionCenteredfigure{\interfaceSL}{Interface of stubborn point-to-point links}{interface-of-stubborn-point-to-point-links}
+	
+	\configuratedText{\textbf{Example: Algorithm 2.1 (Retransmit Forever)}}
+	
+	\sectionCenteredfigure{\algorithmRetransmitForever}{Algorithm 2.1 - Retransmit Forever}{algorithm-2-1}
+	
+	\configuratedText{The algorithm keeps retransmitting all messages. Here we will consider \textit{Correctness} and \textit{Perfromance}.\\ 
+	\textit{\textbf{Correctness}}: for an algorithm implementing \textit{StubbornPointToPointLinks} and using \textit{FairLossPointToPointLinks} upon sl-sending a message by a correct process, the message is \textit{fll}-delivered infinitely often by the target process. Because the algorithm keeps \textit{fll}-sending those messages infinitely.\\
+	The \textit{no-creation} property is also preserved by the underlying links.\\
+	\textbf{\textit{Performance}}: The algorithm is not efficient. There are two ways to make it better:
+	\begin{itemize}
+		\item 	When the algorithm has ended they use of the stubborn links, there is no need to keep on sending the messages.
+		\item 	Add an acknowledgment mechanism which notifies the sender process to stop sending the messages as they are delivered to the target process
+	\end{itemize}
 
+	}
+	
 	\subsubsection{Perfect Links}
 	\configuratedText{With the stubborn links abstraction, it is up to the target process to check whether a given message has already been delivered or not. Adding mechanisms for detecting and suppressing message duplicates, in addition to mechanisms for message retransmission, allows us to build an even higher-level primitive: the \textbf{perfect links} abstraction, sometimes also called the \textit{reliable links} abstraction.}
 
 	\sectionCenteredfigure{\interfacePL}{Interface of perfect point-to-point links}{interface-of-perfect-point-to-point-links}
 
+	\configuratedText{\textbf{Example: Algorithm 2.2 (Eliminate Duplicates)}}
 	
+	\sectionCenteredfigure{\algorithEliminateDuplicatesm}{Algorithm 2.2 - Eliminate Duplicate}{algorithm-2-2}
+	
+	\configuratedText{\textit{\textbf{Correctness}}: according to the algorithm, a process p that pl-sends a message m to target process q. Assuming both these processes are correct and based on the \textit{sl} property, q eventually sl-delivers m, at least once, hence pl-delivers m. So, the reliable delivery is guaranteed. The \textit{no-duplication} property comes from the fact that the messages are being checked if they are delivered before or not and then they are pl-delivered. \textit{No creation} property follows the \textit{no creation} property of the underlying stubborn layer.\\
+	\textbf{\textit{Performance}}: Maintaining physical memory for the ever growing set of messages delivered at every process. Notice that having an periodically acknowledgment and promising not to send those messages anymore is not sufficient as a message can be in transit and uppon delivery, it violates the \textit{no creation} property.
+	}
+
 	\subsubsection{Logged Perfect Links}
-
+	
+	\configuratedText{Suitable for crash-recovery process abstraction.\\ We log the output in a stable storage, which is accessed through \textit{store} and \textit{retrieve} operations.\\ Notice that perfect point-to-point links abstraction uses crash-stop processes, where a process may crash only once and a correct process never crashes. But the crash-recovery process abstraction, as used by logged perfect links, may crash a finite number of times and still called \textit{correct} only if it recovers from a crash.}
 	\sectionCenteredfigure{\interfaceLPL}{Interface of logged perfect point-to-point links}{interface-of-logged-perfect-point-to-point-links}
-
+	
+	\configuratedText{\textbf{Example: Algorithm 2.3 (Log Delivered)}\\ 
+	It is direct adaptation of \textit{Eliminate Duplicates} that implements perfect point-to-point links from stubborn links. It keeps a record of all the messages that have been log-delivered in the past. It stores this record in stable storage and exposes it also to the upper layer.}
+	
+	\sectionCenteredfigure{\algorithmLogDelivered}{Algorithm 2.3 - Log Delivered}{algorithm-2}
+	
+	\configuratedText{\textit{\textbf{Correctness}}: here is just like \textit{Eliminate Duplicates} algorithm. except that delivering here means logging the messages into a stable storage.\\
+	\textit{\textbf{Performance}}: In terms of messages it is like \textit{Eliminate Duplicates} algorithm. However, here we require one log operation every time a new message is received.}
 	\subsubsection{Authenticated Perfect Links}	
+	
+	\configuratedText{In both fair-loss and stubborn point-to-point links abstractions \textit{no creation} property can not be guaranteed in presence of Byzantine Processes.\\ Authenticated Perfect Link uses the same interface as the other point-to-point links abstractions. \textit{Authenticity} property is stronger that \textit{no creation} property. }
+	\sectionCenteredfigure{\interfaceAPL}{Interface of Authenticated perfect point-to-point links}{interface-of-authenticated-perfect-point-to-point-links}
 
-	\sectionCenteredfigure{\interfaceAPL}{Interface of Authenticated perfect point-to-poin links}{interface-of-authenticated-perfect-point-to-point-links}
 
-	\subsubsection{Algorithms on Abstracting Links}	
-		
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"resources/Section 1/Algorithm 2.4 - Authenticate and Filter"}
+	\caption{}
+	\label{fig:algorithm-2}
+\end{figure}
+
 	\newpage
 	\section{Time in Distributed Systems}
 	
@@ -325,18 +362,6 @@
 	\newpage
 	\section{Distributed Mutual Exclusion}
 	
-	\newpage
-	\subsection{Abstracting Communication}
-	
-	\subsubsection{Failure Detection Abstraction}
-	
-	\subsubsection{Perfect Failure Detectors}
-	
-	\subsubsection{Eventually Perfect Failure Detectors}
-	
-	\subsubsection{Leader Election}
-	
-	\subsubsection{Eventual Leader Election}
 	
 	\newpage
 	\section{Broadcast Communications}
